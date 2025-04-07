@@ -25,28 +25,28 @@ spec:
         取消订阅链接： [(${cancelUrl})]
 
     htmlBody: |
-      <div style="width: 700px; max-width: 100%; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 48px; margin: 0 auto; border-radius: 16px; border: 1px solid #e5e7eb;">
-          <div style="text-align: center; margin-bottom: 48px;">
+      <div style="width: 100%; max-width: 700px; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 24px; margin: 0 auto; border-radius: 16px; border: 1px solid #e5e7eb;">
+          <div style="text-align: center; margin-bottom: 32px;">
               <div style="display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                  <h1 style="font-size: 24px; font-weight: bold; color: #1f2937; margin: 0;">最新文章通知</h1>
+                  <h1 style="font-size: 22px; font-weight: bold; color: #1f2937; margin: 0;">最新文章通知</h1>
               </div>
-              <div style="height: 2px; width: 96px; background-color: rgba(59, 130, 246, 0.2); margin: 0 auto;"></div>
+              <div style="height: 2px; width: 64px; background-color: rgba(59, 130, 246, 0.2); margin: 0 auto;"></div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 24px;">
-              <div style="background: linear-gradient(to bottom right, #eff6ff, white); padding: 32px; border-radius: 12px; border: 1px solid #dbeafe; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+          <div style="display: flex; flex-direction: column; gap: 22px;">
+              <div style="background: linear-gradient(to bottom right, #eff6ff, white); padding: 28px; border-radius: 12px; border: 1px solid #dbeafe; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
                   <div style="display: flex; align-items: center; margin-bottom: 16px;">
                       <span style="color: #9ca3af; font-size: 14px;">发布于 [[${postPublishTime}]]</span>
                   </div>
-                  <h2 style="font-size: 24px; font-weight: bold; color: #1f2937; margin-bottom: 16px; line-height: 1.25;">[(${postTitle})]</h2>
-                  <p style="color: #4b5563; margin-bottom: 24px; line-height: 1.625; font-size: 18px;">
+                  <h2 style="font-size: 18px; font-weight: bold; color: #1f2937; margin-bottom: 14px; line-height: 1.25;">[(${postTitle})]</h2>
+                  <p style="color: #4b5563; margin-bottom: 18px; line-height: 1.5; font-size: 16px;">
                       [(${postExcerpt})]
                   </p>
                   <div style="display: flex; align-items: center; justify-content: space-between;">
-                      <a th:href="${postUrl}" style="display: inline-flex; align-items: center; background-color: #3B82F6; color: white; padding: 12px 32px; border-radius: 9999px; font-weight: 500; text-decoration: none; transition: all 0.2s;">
+                      <a th:href="${postUrl}" style="display: inline-flex; align-items: center; background-color: #3B82F6; color: white; padding: 10px 24px; border-radius: 9999px; font-weight: 500; text-decoration: none; transition: all 0.2s; text-align: center; justify-content: center;">
                           <span>阅读全文</span>
                       </a>
                   </div>
-                  <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #f3f4f6;">
+                  <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #f3f4f6;">
                       <div style="display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: #6b7280;">
                           <div style="display: flex; align-items: center;">
                               <span>作者: [(${postOwner})]</span>
@@ -55,8 +55,8 @@ spec:
                   </div>
               </div>
           </div>
-          <div style="margin-top: 32px;">
-              <div style="text-align: center; display: flex; flex-direction: column; gap: 16px;">
+          <div style="margin-top: 22px;">
+              <div style="text-align: center; display: flex; flex-direction: column; gap: 14px;">
                   <div style="padding-top: 16px;">
                       <a th:href="${cancelUrl}" style="color: #64748B;font-size: 14px;align-items: center;justify-content: center;margin: 0 auto;background-color: #eff6ff;padding: 8px 16px;border-radius: 9999px;border: none;cursor: pointer;transition: all 0.2s;text-decoration: none;user-select: none;hover:background-color: #dbeafe;">
                         取消订阅
@@ -69,6 +69,7 @@ spec:
               </div>
           </div>
       </div>
+      <br>
 
 ---
 
@@ -93,40 +94,38 @@ spec:
       确认订阅链接： [(${confirmUrl})]
 
     htmlBody: |
-      <div style="width: 700px; max-width: 100%; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 48px; margin: 0 auto; border-radius: 16px; border: 1px solid #e5e7eb;">
-          <div style="text-align: center; margin-bottom: 48px;">
+      <div style="width: 100%; max-width: 700px; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 24px; margin: 0 auto; border-radius: 16px; border: 1px solid #e5e7eb;">
+          <div style="text-align: center; margin-bottom: 32px;">
               <div style="display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                  <h1 style="font-size: 24px; font-weight: bold; color: #1f2937; margin: 0;">确认订阅</h1>
+                  <h1 style="font-size: 22px; font-weight: bold; color: #1f2937; margin: 0;">确认订阅</h1>
               </div>
-              <div style="height: 2px; width: 96px; background-color: rgba(59, 130, 246, 0.2); margin: 0 auto;"></div>
+              <div style="height: 2px; width: 64px; background-color: rgba(59, 130, 246, 0.2); margin: 0 auto;"></div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 24px;">
-              <div style="background: linear-gradient(to bottom right, #eff6ff, white); padding: 32px; border-radius: 12px; border: 1px solid #dbeafe; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
-                  <h2 style="font-size: 20px; color: #374151; margin-bottom: 24px; line-height: 1.625;">亲爱的订阅者：</h2>
-                  <p style="color: #4b5563; margin-bottom: 32px; line-height: 1.625; font-size: 18px;">
+          <div style="display: flex; flex-direction: column; gap: 22px;">
+              <div style="background: linear-gradient(to bottom right, #eff6ff, white); padding: 28px; border-radius: 12px; border: 1px solid #dbeafe; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+                  <h2 style="font-size: 18px; color: #374151; margin-bottom: 14px; line-height: 1.5;">亲爱的订阅者：</h2>
+                  <p style="color: #4b5563; margin-bottom: 18px; line-height: 1.5; font-size: 16px;">
                       感谢您订阅我的博客！为了确保您能及时收到最新的文章更新，请点击下面的按钮确认您的订阅：
                   </p>
                   <div style="display: flex; align-items: center; justify-content: center;">
-                      <a th:href="${confirmUrl}" style="display: inline-flex; align-items: center; background-color: #3B82F6; color: white; padding: 12px 32px; border-radius: 4px; font-weight: 500; text-decoration: none;">
+                      <a th:href="${confirmUrl}" style="display: inline-flex; align-items: center; background-color: #3B82F6; color: white; padding: 10px 24px; border-radius: 9999px; font-weight: 500; text-decoration: none; text-align: center; justify-content: center;">
                           <span>确认订阅</span>
                       </a>
                   </div>
               </div>
           </div>
-          <div style="margin-top: 32px;">
-              <div style="text-align: center; display: flex; flex-direction: column; gap: 16px;">
-                  <div style="padding-top: 16px;">
-                      <p style="color: #9ca3af; font-size: 14px; text-align: center; margin-top: 16px;">
-                          © [(${site.title})]. 保留所有权利 <br>
-                          <span style="font-size: 12px;">此邮件由系统自动发送，请勿直接回复</span>
-                      </p>
-                  </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 14px;">
+              <div style="padding-top: 16px;">
+                  <p style="color: #9ca3af; font-size: 14px; text-align: center; margin-top: 16px;">
+                      © [(${site.title})]. 保留所有权利 <br>
+                      <span style="font-size: 12px;">此邮件由系统自动发送，请勿直接回复</span>
+                  </p>
               </div>
           </div>
-      </div>                               
+      </div>
+      <br>
 
 ---
-
 
 apiVersion: notification.halo.run/v1alpha1
 kind: NotificationTemplate
@@ -149,34 +148,33 @@ spec:
       重新订阅链接： [(${confirmUrl})]
 
     htmlBody: |
-      <div style="width: 700px; max-width: 100%; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 48px; margin: 0 auto; border-radius: 16px; border: 1px solid #e5e7eb;">
-          <div style="text-align: center; margin-bottom: 48px;">
+      <div style="width: 100%; max-width: 700px; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); padding: 24px; margin: 0 auto; border-radius: 16px; border: 1px solid #e5e7eb;">
+          <div style="text-align: center; margin-bottom: 32px;">
               <div style="display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                  <h1 style="font-size: 24px; font-weight: bold; color: #1f2937; margin: 0;">订阅已取消</h1>
+                  <h1 style="font-size: 22px; font-weight: bold; color: #1f2937; margin: 0;">订阅已取消</h1>
               </div>
-              <div style="height: 2px; width: 96px; background-color: rgba(59, 130, 246, 0.2); margin: 0 auto;"></div>
+              <div style="height: 2px; width: 64px; background-color: rgba(59, 130, 246, 0.2); margin: 0 auto;"></div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 24px;">
-              <div style="background: linear-gradient(to bottom right, #eff6ff, white); padding: 32px; border-radius: 12px; border: 1px solid #dbeafe; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
-                  <h2 style="font-size: 20px; color: #374151; margin-bottom: 24px; line-height: 1.625;">亲爱的订阅者：</h2>
-                  <p style="color: #4b5563; margin-bottom: 32px; line-height: 1.625; font-size: 18px;">
+          <div style="display: flex; flex-direction: column; gap: 22px;">
+              <div style="background: linear-gradient(to bottom right, #eff6ff, white); padding: 28px; border-radius: 12px; border: 1px solid #dbeafe; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+                  <h2 style="font-size: 18px; color: #374151; margin-bottom: 14px; line-height: 1.25;">亲爱的订阅者：</h2>
+                  <p style="color: #4b5563; margin-bottom: 18px; line-height: 1.5; font-size: 16px;">
                       您已成功取消订阅我们的博客更新。我们很遗憾看到您的离开。如果您改变主意，随时欢迎重新订阅。
                   </p>
                   <div style="display: flex; align-items: center; justify-content: center;">
-                      <a th:href="${confirmUrl}" style="display: inline-flex; align-items: center; background-color: #3B82F6; color: white; padding: 12px 32px; border-radius: 4px; font-weight: 500; text-decoration: none;">
+                      <a th:href="${confirmUrl}" style="display: inline-flex; align-items: center; background-color: #3B82F6; color: white; padding: 10px 24px; border-radius: 9999px; font-weight: 500; text-decoration: none; text-align: center; justify-content: center;">
                           <span>重新订阅</span>
                       </a>
                   </div>
               </div>
           </div>
-          <div style="margin-top: 32px;">
-              <div style="text-align: center; display: flex; flex-direction: column; gap: 16px;">
-                  <div style="padding-top: 16px;">
-                      <p style="color: #9ca3af; font-size: 14px; text-align: center; margin-top: 16px;">
-                          © [(${site.title})]. 保留所有权利 <br>
-                          <span style="font-size: 12px;">此邮件由系统自动发送，请勿直接回复</span>
-                      </p>
-                  </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 14px;">
+              <div style="padding-top: 16px;">
+                  <p style="color: #9ca3af; font-size: 14px; text-align: center; margin-top: 16px;">
+                      © [(${site.title})]. 保留所有权利 <br>
+                      <span style="font-size: 12px;">此邮件由系统自动发送，请勿直接回复</span>
+                  </p>
               </div>
           </div>
       </div>
+      <br>
