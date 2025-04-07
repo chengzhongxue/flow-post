@@ -1,0 +1,15 @@
+apiVersion: v1alpha1
+kind: Role
+metadata:
+  name:  role-template-anonymous-follow
+  labels:
+    halo.run/hidden: "true"
+    halo.run/role-template: "true"
+    rbac.authorization.halo.run/aggregate-to-anonymous: "true"
+  annotations:
+    rbac.authorization.halo.run/module: "订阅文章"
+    rbac.authorization.halo.run/display-name: "匿名接口"
+rules:
+  - apiGroups: [ "api.flow.post.kunkunyu.com" ]
+    resources: [ "follows/confirm","follows/cancel","follows/submit" ]
+    verbs: [ "create","get" ]

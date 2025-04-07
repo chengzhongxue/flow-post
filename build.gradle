@@ -32,7 +32,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 node {
-    nodeProjectDir = file("${project.projectDir}/ui")
+    nodeProjectDir = file("${project.projectDir}")
 }
 
 tasks.register('buildFrontend', PnpmTask) {
@@ -51,6 +51,51 @@ build {
     }
 }
 
+
 halo {
     version = '2.20'
+    superAdminUsername = 'admin'
+    superAdminPassword = 'admin'
+    externalUrl = 'http://localhost:8094'
+    docker {
+        // windows 需要改为 npipe:////./pipe/docker_engine
+        // linux、macos 需要改为 unix:///var/run/docker.sock
+        url = 'npipe:////./pipe/docker_engine'
+        apiVersion = '1.47'
+    }
+    port = 8094
+
+    // 开启 debug 断点模式
+    debug = true
+    debugPort = 5008
+
+    containerName = 'flow-post'
+    // 控制台会挂起，等待点击 Attach debugger 按钮
+    suspend = true
+}
+
+haloPlugin {
+    openApi {
+        outputDir = file("$rootDir/api-docs/openapi/v3_0")
+        // 用于定义 API 分组规则
+        groupingRules {
+            // 此名称为 group name，定义后 groupedApiMappings 中的 /v3/api-docs/ 后的名称需要与之相同，要避免与 halo 中已经存在的 group 相同避免生成后出现与插件无关的 API
+            flowPostApi {
+                // 分组显示名称
+                displayName = 'Extension API for FlowPost'
+                // 分组的 API 规则
+                pathsToMatch = ["/apis/flow.post.kunkunyu.com/v1alpha1/**",
+                                "/apis/api.flow.post.kunkunyu.com/v1alpha1/**",
+                ]
+            }
+        }
+        groupedApiMappings = [
+                '/v3/api-docs/flowPostApi': 'flowPostApi.json'
+        ]
+        generator {
+            // 默认配置可缺省
+            outputDir = file("${projectDir}/ui/src/api/generated")
+        }
+    }
+
 }

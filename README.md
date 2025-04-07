@@ -1,76 +1,83 @@
-# plugin-starter
+# flow-post
 
-Halo 2.0 插件开发快速开始模板。
+## 使用方式
 
-## 开发环境
+### 默认编辑器
 
-插件开发的详细文档请查阅：<https://docs.halo.run/developer-guide/plugin/introduction>
+![Snipaste_2025-04-07_21-38-41.webp](https://api.minio.yyds.pink/halo-docs/2025/04/Snipaste_2025-04-07_21-38-41.webp)
+![Snipaste_2025-04-07_21-39-09.webp](https://api.minio.yyds.pink/halo-docs/2025/04/Snipaste_2025-04-07_21-39-09.webp)
 
-所需环境：
+### 作为标签使用
 
-1. Java 17
-2. Node 20
-3. pnpm 9
-4. Docker (可选)
-
-克隆项目：
-
-```bash
-git clone git@github.com:halo-sigs/plugin-starter.git
-
-# 或者当你 fork 之后
-
-git clone git@github.com:{your_github_id}/plugin-starter.git
+``` html
+<follow-card></follow-card>
 ```
 
-```bash
-cd path/to/plugin-starter
+## 主题适配
+
+### 自定义样式
+
+目前已提供的 CSS 变量：
+
+| 变量名 | 描述 |
+|--------|------|
+| --follow-title-color | 标题文字颜色 |
+| --follow-description-color | 描述文字颜色 |
+| --follow-bg-color | 卡片背景色 |
+| --follow-input-bg | 输入框背景色 |
+| --follow-input-border | 输入框边框颜色 |
+| --follow-button-bg | 按钮背景色 |
+| --follow-button-text | 按钮文字颜色 |
+| --follow-card-shadow | 卡片阴影效果 |
+
+
+### 配色切换方案
+
+根据上面提供的 CSS 变量，也可以通过定义 CSS 变量的方式为订阅卡片提供动态切换配色的功能。
+以下是实现示例，你可以根据需求自行修改选择器或者媒体查询。
+
+``` css
+@media (prefers-color-scheme: dark) {
+  .color-scheme-auto,
+  [data-color-scheme='auto'] follow-card {
+    color-scheme: dark;
+    --follow-title-color: #f4f4f5;
+    --follow-description-color: #a1a1aa;
+    --follow-bg-color: #18181b;
+    --follow-input-bg: #27272a;
+    --follow-input-border: #3f3f46;
+    --follow-button-bg: #3b82f6;
+    --follow-button-text: #ffffff;
+    --follow-card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.color-scheme-dark,
+.dark,
+[data-color-scheme='dark'] follow-card {
+  color-scheme: dark;
+
+  --follow-title-color: #f4f4f5;
+  --follow-description-color: #a1a1aa;
+  --follow-bg-color: #18181b;
+  --follow-input-bg: #27272a;
+  --follow-input-border: #3f3f46;
+  --follow-button-bg: #3b82f6;
+  --follow-button-text: #ffffff;
+  --follow-card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
+}
+
 ```
 
-### 运行方式 1（推荐）
+此外，为了让主题可以更加方便的适配暗黑模式，此插件也提供了一套暗黑模式的配色方案，主题可以直接使用此方案，而不需要自己去适配暗黑模式，适配方式如下：
 
-> 此方式需要本地安装 Docker
+1. 在 html 或者 body 标签添加 class：
+   - `color-scheme-auto`：自动模式，根据系统的暗黑模式自动切换。
+   - `color-scheme-dark` / `dark`：强制暗黑模式。
+   - `color-scheme-light` / `light`：强制明亮模式。
+2. 在 html 或者 body 标签添加 data-color-scheme 属性：
+   - `auto`：自动模式，根据系统的暗黑模式自动切换。
+   - `dark`：强制暗黑模式。
+   - `light`：强制明亮模式。
 
-```bash
-# macOS / Linux
-./gradlew pnpmInstall
-
-# Windows
-./gradlew.bat pnpmInstall
-```
-
-```bash
-# macOS / Linux
-./gradlew haloServer
-
-# Windows
-./gradlew.bat haloServer
-```
-
-执行此命令后，会自动创建一个 Halo 的 Docker 容器并加载当前的插件，更多文档可查阅：<https://docs.halo.run/developer-guide/plugin/basics/devtools>
-
-### 运行方式 2
-
-> 此方式需要使用源码运行 Halo
-
-编译插件：
-
-```bash
-# macOS / Linux
-./gradlew build
-
-# Windows
-./gradlew.bat build
-```
-
-修改 Halo 配置文件：
-
-```yaml
-halo:
-  plugin:
-    runtime-mode: development
-    fixedPluginPath:
-      - "/path/to/plugin-starter"
-```
-
-最后重启 Halo 项目即可。
+    

@@ -1,0 +1,73 @@
+apiVersion: notification.halo.run/v1alpha1
+kind: ReasonType
+metadata:
+  name: subscribe-to-new-post
+  annotations:
+    rbac.authorization.halo.run/ui-permissions: |
+      [ "plugin:flow:post:follow:manage" ]
+spec:
+  displayName: "订阅文章推送"
+  description: "文章发布时触发"
+  properties:
+    - name: email
+      type: string
+      description: "邮箱"
+    - name: cancelUrl
+      type: string
+      description: "取消订阅链接"
+    - name: postTitle
+      type: string
+      description: "文章标题"
+    - name: postExcerpt
+      type: string
+      description: "文章摘要"
+    - name: postOwner
+      type: string
+      description: "文章作者"
+    - name: postPublishTime
+      type: string
+      description: "文章发布时间"
+    - name: postUrl
+      type: string
+      description: "文章访问链接"
+
+
+---
+
+apiVersion: notification.halo.run/v1alpha1
+kind: ReasonType
+metadata:
+  name: submit-follow
+  annotations:
+    rbac.authorization.halo.run/ui-permissions: |
+      [ "plugin:flow:post:follow:manage" ]
+spec:
+  displayName: "提交订阅"
+  description: "提交订阅时触发"
+  properties:
+    - name: email
+      type: string
+      description: "邮箱"
+    - name: confirmUrl
+      type: string
+      description: "确定订阅链接"
+
+---
+
+apiVersion: notification.halo.run/v1alpha1
+kind: ReasonType
+metadata:
+  name: cancel-follow
+  annotations:
+    rbac.authorization.halo.run/ui-permissions: |
+      [ "plugin:flow:post:follow:manage" ]
+spec:
+  displayName: "订阅已取消"
+  description: "取消订阅触发"
+  properties:
+    - name: email
+      type: string
+      description: "邮箱"
+    - name: confirmUrl
+      type: string
+      description: "重新订阅链接"

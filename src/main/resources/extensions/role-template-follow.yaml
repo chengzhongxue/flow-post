@@ -1,0 +1,38 @@
+apiVersion: v1alpha1
+kind: "Role"
+metadata:
+  name: role-template-manage-follow
+  labels:
+    halo.run/role-template: "true"
+  annotations:
+    rbac.authorization.halo.run/dependencies: |
+      [ "role-template-view-follow" ]
+    rbac.authorization.halo.run/module: "订阅文章"
+    rbac.authorization.halo.run/display-name: "订阅管理"
+    rbac.authorization.halo.run/ui-permissions: |
+      ["plugin:flow:post:follow:manage"]
+rules:
+  - apiGroups: [ "flow.post.kunkunyu.com" ]
+    resources: [ "follows" ]
+    verbs: [ "create", "patch", "update", "delete", "deletecollection" ]
+
+---
+
+apiVersion: v1alpha1
+kind: "Role"
+metadata:
+  name: role-template-view-follow
+  labels:
+    halo.run/role-template: "true"
+  annotations:
+    rbac.authorization.halo.run/module: "订阅文章"
+    rbac.authorization.halo.run/display-name: "订阅查看"
+    rbac.authorization.halo.run/ui-permissions: |
+      ["plugin:flow:post:follow:view"]
+rules:
+  - apiGroups: [ "flow.post.kunkunyu.com" ]
+    resources: [ "follows" ]
+    verbs: [ "get", "list" ]
+  - apiGroups: [ "api.flow.post.kunkunyu.com" ]
+    resources: [ "follows" ]
+    verbs: [ "list" ]
