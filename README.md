@@ -13,6 +13,11 @@
 <follow-card></follow-card>
 ```
 
+## 预览
+
+![Snipaste_2025-04-07_22-05-12.webp](https://api.minio.yyds.pink/halo-docs/2025/04/Snipaste_2025-04-07_22-05-12.webp)
+![Snipaste_2025-04-07_22-05-21.webp](https://api.minio.yyds.pink/halo-docs/2025/04/Snipaste_2025-04-07_22-05-21.webp)
+
 ## 主题适配
 
 ### 自定义样式
