@@ -18,6 +18,7 @@ export default definePlugin({
           title: "文章订阅",
           description: "允许用户轻松订阅您的网站或博客，及时获取最新文章通知。支持邮件订阅、推送提醒等功能，帮助您留住读者并提升互动率",
           searchable: true,
+          permissions: ["*"],
           menu: {
             name: "文章订阅",
             icon: markRaw(MingcuteFollowLine),
