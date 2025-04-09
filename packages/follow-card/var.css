@@ -1,0 +1,33 @@
+/* Light mode (default) */
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .color-scheme-auto,
+  [data-color-scheme='auto'] follow-card {
+    color-scheme: dark;
+    --follow-title-color: #f4f4f5;
+    --follow-description-color: #a1a1aa;
+    --follow-bg-color: #18181b;
+    --follow-input-bg: #27272a;
+    --follow-input-border: #3f3f46;
+    --follow-button-bg: #3b82f6;
+    --follow-button-text: #ffffff;
+    --follow-card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Force dark mode */
+.color-scheme-dark,
+.dark,
+[data-color-scheme='dark'] follow-card {
+  color-scheme: dark;
+
+  --follow-title-color: #f4f4f5;
+  --follow-description-color: #a1a1aa;
+  --follow-bg-color: #18181b;
+  --follow-input-bg: #27272a;
+  --follow-input-border: #3f3f46;
+  --follow-button-bg: #3b82f6;
+  --follow-button-text: #ffffff;
+  --follow-card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
+}

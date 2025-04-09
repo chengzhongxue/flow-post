@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.web.util.UriComponentsBuilder;
 import run.halo.app.core.extension.User;
+import run.halo.app.core.extension.content.Constant;
 import run.halo.app.core.extension.content.Post;
 import run.halo.app.core.extension.notification.Reason;
 import run.halo.app.event.post.PostPublishedEvent;
@@ -24,13 +25,17 @@ import run.halo.app.infra.utils.JsonUtils;
 import run.halo.app.notification.NotificationReasonEmitter;
 import run.halo.app.notification.UserIdentity;
 import java.net.URI;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.kunkunyu.post.flow.NotificationReasonConst.SUBSCRIBE_TO_NEW_POST;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.springframework.data.domain.Sort.Order.desc;
+import static run.halo.app.extension.MetadataUtil.nullSafeAnnotations;
 import static run.halo.app.extension.index.query.QueryFactory.and;
 import static run.halo.app.extension.index.query.QueryFactory.equal;
 import static run.halo.app.extension.index.query.QueryFactory.isNull;
@@ -48,37 +53,41 @@ public class NotificationReasonPublisher {
 
     private static final String CANCELLED_PUBLISH_CONDITION = "CancelledPublish";
 
+    public static final String NEW_POST_NOTIFIED_ANNO = "flow.post.kunkunyu.com/new-post-notified";
+
     @Async
     @EventListener(PostPublishedEvent.class)
     public void onPostPublished(PostPublishedEvent event) {
         client.fetch(Post.class, event.getName())
             .ifPresent(post -> {
+                var annotations = nullSafeAnnotations(post);
 
+                var newPostNotified = annotations.getOrDefault(NEW_POST_NOTIFIED_ANNO,"false");
+
+                // 获取当前时间
+                Instant now = Instant.now();
+                // 获取发布时间
+                Instant publishTime = post.getSpec().getPublishTime();
                 var visible = post.getSpec().getVisible();
-                if (!visible.equals(Post.VisibleEnum.PUBLIC)) {
-                    return;
+                if (Objects.equals(newPostNotified,"false") &&
+                    Duration.between(now, publishTime).getSeconds() <= 300 &&
+                    visible.equals(Post.VisibleEnum.PUBLIC)) {
+
+                    String owner = post.getSpec().getOwner();
+                    client.fetch(User.class, owner)
+                        .ifPresent(user -> {
+                            String postOwner = user.getSpec().getDisplayName();
+                            var listOptions = new ListOptions();
+                            listOptions.setFieldSelector(FieldSelector.of(
+                                and(equal("status", Follow.FollowStatus.confirm.name()),
+                                    isNull("metadata.deletionTimestamp"))
+                            ));
+                            client.listAll(Follow.class,listOptions, Sort.by(desc("metadata.creationTimestamp"),desc("metadata.name")))
+                                .forEach(follow -> postPublishedNoticeReasonPublisher.publishReasonBy(post, follow, postOwner));
+                            annotations.put(NEW_POST_NOTIFIED_ANNO,"true");
+                            client.update(post);
+                        });
                 }
-                var status = post.getStatus();
-                if (status != null) {
-                    boolean isCancelled = status.getConditions().stream()
-                        .anyMatch(condition -> CANCELLED_PUBLISH_CONDITION.equals(condition.getType()));
-                        
-                    if (isCancelled) {
-                        return;
-                    }
-                }
-                String owner = post.getSpec().getOwner();
-                client.fetch(User.class, owner)
-                    .ifPresent(user -> {
-                        String postOwner = user.getSpec().getDisplayName();
-                        var listOptions = new ListOptions();
-                        listOptions.setFieldSelector(FieldSelector.of(
-                            and(equal("status", Follow.FollowStatus.confirm.name()),
-                                isNull("metadata.deletionTimestamp"))
-                        ));
-                        client.listAll(Follow.class,listOptions, Sort.by(desc("metadata.creationTimestamp"),desc("metadata.name")))
-                            .forEach(follow -> postPublishedNoticeReasonPublisher.publishReasonBy(post, follow, postOwner));
-                    });
             });
     }
 

@@ -1,0 +1,60 @@
+{
+    "name": "@kunkunyu/follow-card",
+    "author": {
+        "name": "困困鱼",
+        "url": "https://github.com/chengzhongxue"
+    },
+    "maintainers": [
+        {
+            "name": "困困鱼",
+            "url": "https://github.com/chengzhongxue"
+        }
+    ],
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/follow-card.js"
+        },
+        "./var.css": "./var.css"
+    },
+    "main": "./dist/follow-card.js",
+    "module": "./dist/follow-card.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist",
+        "var.css"
+    ],
+    "scripts": {
+        "dev": "vite --config vite.config.dev.ts",
+        "build": "vite build --config vite.config.lib.ts",
+        "lint": "lit-analyzer && eslint 'src/**/*.ts'",
+        "prettier": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.gitignore --write",
+        "test": "vitest",
+        "test:ci": "vitest --run"
+    },
+    "dependencies": {
+        "lit": "^3.1.3"
+    },
+    "devDependencies": {
+        "@iconify/json": "^2.2.216",
+        "@rushstack/eslint-patch": "^1.7.2",
+        "@types/node": "20",
+        "@typescript-eslint/eslint-plugin": "^6.21.0",
+        "@typescript-eslint/parser": "^6.21.0",
+        "@unocss/preset-icons": "^0.60.4",
+        "@unocss/reset": "^0.60.4",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.1.3",
+        "lit-analyzer": "^2.0.3",
+        "prettier": "^3.3.0",
+        "rollup-plugin-copy": "^3.5.0",
+        "typescript": "^5.4.5",
+        "unocss": "^0.60.4",
+        "vite": "^5.2.12",
+        "vite-plugin-dts": "^3.9.1",
+        "vite-plugin-static-copy": "^1.0.6",
+        "vitest": "^1.6.0"
+    }
+}

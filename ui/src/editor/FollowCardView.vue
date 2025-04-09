@@ -2,7 +2,17 @@
 import type {NodeViewProps} from "@halo-dev/richtext-editor";
 import { NodeViewWrapper } from "@halo-dev/richtext-editor";
 import type { FollowCard } from '@kunkunyu/follow-card';
+import {computed} from "vue";
 const props = defineProps<NodeViewProps>();
+
+const textAlign = computed({
+  get: () => {
+    return props.node?.attrs.textAlign;
+  },
+  set: (textAlign: string) => {
+    props.updateAttributes({ textAlign: textAlign });
+  },
+});
 
 </script>
 
@@ -13,7 +23,7 @@ const props = defineProps<NodeViewProps>();
       }">
 
     <div class="contact-follow-card-preview">
-      <follow-card/>
+      <follow-card :text-align = "textAlign" />
     </div>
     
   </node-view-wrapper>

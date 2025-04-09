@@ -6,7 +6,8 @@ import {
   nodeInputRule,
   type Range,
   VueNodeViewRenderer,
-  type EditorState,
+  type EditorState, 
+  BlockActionSeparator,
 } from "@halo-dev/richtext-editor";
 import FollowCardView from "./FollowCardView.vue";
 import { markRaw } from "vue";
@@ -14,6 +15,9 @@ import { ToolboxItem } from "@halo-dev/richtext-editor";
 import MdiDeleteForeverOutline from "~icons/mdi/delete-forever-outline?color=red";
 import { deleteNode } from "../utils/delete-node";
 import MingcuteFollowLine from '~icons/mingcute/follow-line?width=1.2em&height=1.2em';
+import MdiFormatAlignCenter from "~icons/mdi/format-align-center";
+import MdiFormatAlignLeft from "~icons/mdi/format-align-left";
+import MdiFormatAlignRight from "~icons/mdi/format-align-right";
 
 declare module "@halo-dev/richtext-editor" {
   interface Commands<ReturnType> {
@@ -34,6 +38,17 @@ const FollowCardExtension = Node.create({
   addAttributes() {
     return {
       ...this.parent?.(),
+      textAlign: {
+        default: "center",
+        parseHTML: (element) => {
+          return element.getAttribute("text-align");
+        },
+        renderHTML: (attributes) => {
+          return {
+            "text-align": attributes.textAlign,
+          };
+        },
+      },
     };
   },
 
@@ -121,6 +136,37 @@ const FollowCardExtension = Node.create({
             {
               priority: 10,
               props: {
+                icon: markRaw(MdiFormatAlignLeft),
+                title: "左",
+                isActive: () => editor.isActive(FollowCardExtension.name,{ textAlign: "left" }),
+                action: () => editor.commands.updateAttributes(FollowCardExtension.name, { textAlign: "left",}),
+              },
+            },
+            {
+              priority: 20,
+              props: {
+                icon: markRaw(MdiFormatAlignCenter),
+                title: "居中",
+                isActive: () => editor.isActive(FollowCardExtension.name,{ textAlign: "center" }),
+                action: () => editor.commands.updateAttributes(FollowCardExtension.name, { textAlign: "center",}),
+              },
+            },
+            {
+              priority: 30,
+              props: {
+                icon: markRaw(MdiFormatAlignRight),
+                title: "右",
+                isActive: () => editor.isActive(FollowCardExtension.name,{ textAlign: "right" }),
+                action: () => editor.commands.updateAttributes(FollowCardExtension.name, { textAlign: "right",}),
+              },
+            },
+            {
+              priority: 50,
+              component: markRaw(BlockActionSeparator),
+            },
+            {
+              priority: 60,
+              props: {
                 icon: markRaw(MdiDeleteForeverOutline),
                 title: "删除",
                 action: ({ editor }: { editor: Editor }) => {
@@ -136,4 +182,5 @@ const FollowCardExtension = Node.create({
 
 
 })
+
 export default FollowCardExtension;
