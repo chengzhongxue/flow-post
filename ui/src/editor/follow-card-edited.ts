@@ -18,6 +18,10 @@ import MingcuteFollowLine from '~icons/mingcute/follow-line?width=1.2em&height=1
 import MdiFormatAlignCenter from "~icons/mdi/format-align-center";
 import MdiFormatAlignLeft from "~icons/mdi/format-align-left";
 import MdiFormatAlignRight from "~icons/mdi/format-align-right";
+import BubbleItemICardTitle from "@/editor/BubbleItemICardTitle.vue";
+import FluentAppTitle20Regular from '~icons/fluent/app-title-20-regular?width=1.2em&height=1.2em';
+import FluentAppTitle20Filled from '~icons/fluent/app-title-20-filled?width=1.2em&height=1.2em';
+import MdiFormatTitle from '~icons/mdi/format-title?width=1.2em&height=1.2em';
 
 declare module "@halo-dev/richtext-editor" {
   interface Commands<ReturnType> {
@@ -46,6 +50,28 @@ const FollowCardExtension = Node.create({
         renderHTML: (attributes) => {
           return {
             "text-align": attributes.textAlign,
+          };
+        },
+      },
+      showTitle: {
+        default: "true",
+        parseHTML: (element) => {
+          return element.getAttribute("show-title");
+        },
+        renderHTML: (attributes) => {
+          return {
+            "show-title": attributes.showTitle,
+          };
+        },
+      },
+      titleText: {
+        default: "订阅最新内容推送",
+        parseHTML: (element) => {
+          return element.getAttribute("title-text") || "订阅最新内容推送";
+        },
+        renderHTML: (attributes) => {
+          return {
+            "title-text": attributes.titleText,
           };
         },
       },
@@ -158,6 +184,43 @@ const FollowCardExtension = Node.create({
                 title: "右",
                 isActive: () => editor.isActive(FollowCardExtension.name,{ textAlign: "right" }),
                 action: () => editor.commands.updateAttributes(FollowCardExtension.name, { textAlign: "right",}),
+              },
+            },
+            {
+              priority: 40,
+              component: markRaw(BlockActionSeparator),
+            },
+            {
+              priority: 45,
+              props: {
+                title:
+                  editor.getAttributes(FollowCardExtension.name).showTitle === "true"
+                    ? "隐藏标题"
+                    : "显示标题",
+                isActive: () => {
+                  return editor.getAttributes(FollowCardExtension.name).showTitle  === "true";
+                },
+                icon: markRaw(
+                  editor.getAttributes(FollowCardExtension.name).showTitle === "true"
+                    ? FluentAppTitle20Filled
+                    : FluentAppTitle20Regular
+                ),
+                action: () => {
+                  const showTitle = editor.getAttributes(FollowCardExtension.name).showTitle;
+                  editor.commands.updateAttributes(FollowCardExtension.name, { 
+                    showTitle: showTitle === "false" ? "true" : "false" 
+                  });
+                },
+              },
+            },
+            {
+              priority: 46,
+              props: {
+                icon: markRaw(MdiFormatTitle),
+                title: "修改标题",
+                action: () => {
+                  return markRaw(BubbleItemICardTitle);
+                },
               },
             },
             {

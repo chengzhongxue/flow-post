@@ -14,6 +14,18 @@ const textAlign = computed({
   },
 });
 
+const showTitle = computed(() => {
+  return props.node.attrs.showTitle;
+});
+
+const titleText = computed({
+  get: () => {
+    return props.node?.attrs.titleText || '订阅最新内容推送';
+  },
+  set: (titleText: string) => {
+    props.updateAttributes({ titleText: titleText });
+  },
+});
 </script>
 
 <template>
@@ -23,7 +35,11 @@ const textAlign = computed({
       }">
 
     <div class="contact-follow-card-preview">
-      <follow-card :text-align = "textAlign" />
+      <follow-card 
+        :text-align="textAlign"
+        :show-title="showTitle"
+        :title-text="titleText" 
+      />
     </div>
     
   </node-view-wrapper>

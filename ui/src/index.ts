@@ -4,6 +4,7 @@ import Follows from "@/views/Follows.vue";
 import '@kunkunyu/follow-card';
 import {FollowCardExtension} from "@/editor";
 import MingcuteFollowLine from '~icons/mingcute/follow-line?width=1.2em&height=1.2em';
+import NewPostNotifiedField from "@/views/NewPostNotifiedField.vue";
 
 export default definePlugin({
   components: {},
@@ -32,5 +33,15 @@ export default definePlugin({
     "default:editor:extension:create": () => {
       return [FollowCardExtension];
     },
+    "post:list-item:field:create": (post) => {
+      return [{
+        priority: 40,
+        position: "end",
+        component: markRaw(NewPostNotifiedField),
+        props: {
+          post
+        }
+      }];
+    }
   },
 });

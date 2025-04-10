@@ -10,7 +10,17 @@
 ### 作为标签使用
 
 ``` html
+<!-- 显示默认标题 -->
 <follow-card></follow-card>
+
+<!-- 不显示标题 -->
+<follow-card show-title="false"></follow-card>
+
+<!-- 自定义标题 -->
+<follow-card title-text="订阅我的博客更新"></follow-card>
+
+<!-- 同时设置对齐方式和标题 -->
+<follow-card text-align="left" title-text="加入我的订阅列表"></follow-card>
 ```
 
 ## 预览
@@ -31,9 +41,16 @@
 | --follow-bg-color | 卡片背景色 |
 | --follow-input-bg | 输入框背景色 |
 | --follow-input-border | 输入框边框颜色 |
+| --follow-input-radius | 输入框圆角 |
 | --follow-button-bg | 按钮背景色 |
 | --follow-button-text | 按钮文字颜色 |
+| --follow-button-radius | 按钮圆角 |
 | --follow-card-shadow | 卡片阴影效果 |
+| --follow-card-border | 卡片边框样式 |
+| --follow-card-radius | 卡片圆角 |
+| --follow-card-padding-sm | 卡片小屏幕内边距 |
+| --follow-card-padding-md | 卡片中屏幕内边距 |
+| --follow-card-padding-lg | 卡片大屏幕内边距 |
 
 
 ### 配色切换方案
@@ -42,6 +59,22 @@
 以下是实现示例，你可以根据需求自行修改选择器或者媒体查询。
 
 ``` css
+
+:root {
+
+  --follow-card-radius: 1rem;    /* 卡片圆角 */
+  --follow-input-radius: 0.5rem; /* 输入框圆角 */
+  --follow-button-radius: 0.5rem; /* 按钮圆角 */
+
+  /* 卡片内边距 */
+  --follow-card-padding-sm: 1.5rem;  /* 小屏幕内边距 */
+  --follow-card-padding-md: 2rem;    /* 中屏幕内边距 */
+  --follow-card-padding-lg: 3rem;    /* 大屏幕内边距 */
+  
+  /* 卡片边框 */
+  --follow-card-border: 1px solid #e2e8f0;
+}
+
 @media (prefers-color-scheme: dark) {
   .color-scheme-auto,
   [data-color-scheme='auto'] follow-card {
@@ -54,6 +87,7 @@
     --follow-button-bg: #3b82f6;
     --follow-button-text: #ffffff;
     --follow-card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
+    --follow-card-border: 1px solid rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -70,6 +104,7 @@
   --follow-button-bg: #3b82f6;
   --follow-button-text: #ffffff;
   --follow-card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
+  --follow-card-border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 ```

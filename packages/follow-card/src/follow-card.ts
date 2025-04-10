@@ -8,6 +8,12 @@ export class FollowCard extends LitElement {
   @property({ type: String , attribute: 'text-align' })
   textAlign: 'left' | 'center' | 'right' = 'right';
 
+  @property({ type: String, attribute: 'show-title' })
+  showTitle = 'true';
+
+  @property({ type: String, attribute: 'title-text' })
+  titleText = '订阅最新内容推送';
+
   @state()
   submitting = false;
 
@@ -62,10 +68,12 @@ export class FollowCard extends LitElement {
       return html`
           <div class="flex items-center ${justifyClass}">
               <form @submit=${this.onSubmit} class="w-full max-w-[600px]">
-                  <div class="subscribe-card w-full p-6 sm:p-8 md:p-12 rounded-xl backdrop-blur-sm bg-card">
+                  <div class="subscribe-card w-full card-padding rounded-card backdrop-blur-sm bg-card">
+                      ${this.showTitle == 'true' ? html`
                       <div class="text-center mb-6 sm:mb-8">
-                          <h1 class="text-xl sm:text-2xl font-semibold text-title mb-2">订阅最新内容推送</h1>
+                          <h1 class="text-xl sm:text-2xl font-semibold text-title mb-2">${this.titleText}</h1>
                       </div>
+                      ` : ''}
                       <div class="flex flex-col sm:flex-row gap-4">
                           <div class="input-wrapper flex-1">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-description">
@@ -75,12 +83,12 @@ export class FollowCard extends LitElement {
                               <input type="email"
                                      name="email"
                                      required
-                                     class="w-full px-12 py-3 sm:py-3.5 border border-input rounded-lg text-title placeholder:text-description bg-input"
+                                     class="w-full px-12 py-3 sm:py-3.5 border border-input rounded-input text-title placeholder:text-description bg-input"
                                      placeholder="输入您的电子邮箱">
                           </div>
                           <button
                                   .disabled=${this.submitting}
-                                  class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-button text-button rounded-lg whitespace-nowrap flex items-center justify-center gap-3 shadow-lg">
+                                  class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-button text-button rounded-button whitespace-nowrap flex items-center justify-center gap-3 shadow-lg">
                               立即订阅
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                                   <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" clip-rule="evenodd" />
@@ -104,7 +112,7 @@ export class FollowCard extends LitElement {
             background: white;
             box-shadow: var(--follow-card-shadow, 0 10px 30px -5px rgba(0, 0, 0, 0.08));
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: var(--follow-card-border, 1px solid rgba(255, 255, 255, 0.2));
         }
 
         .input-wrapper {
