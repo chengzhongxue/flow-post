@@ -13,8 +13,5 @@ jobs:
     permissions:
       contents: write
     with:
-      node-version: "20"
-      pnpm-version: "10"
       app-id: app-yldNX
-      skip-node-setup: false
-      ui-path: "ui"
+      ui-path: "."
