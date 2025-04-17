@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.web.util.UriComponentsBuilder;
 import run.halo.app.core.extension.User;
-import run.halo.app.core.extension.content.Constant;
 import run.halo.app.core.extension.content.Post;
 import run.halo.app.core.extension.notification.Reason;
 import run.halo.app.event.post.PostPublishedEvent;
@@ -51,8 +50,6 @@ public class NotificationReasonPublisher {
 
     private final PostPublishedNoticeReasonPublisher postPublishedNoticeReasonPublisher;
 
-    private static final String CANCELLED_PUBLISH_CONDITION = "CancelledPublish";
-
     public static final String NEW_POST_NOTIFIED_ANNO = "flow.post.kunkunyu.com/new-post-notified";
 
     @Async
@@ -68,9 +65,12 @@ public class NotificationReasonPublisher {
                 Instant now = Instant.now();
                 // 获取发布时间
                 Instant publishTime = post.getSpec().getPublishTime();
+
+                Duration duration = Duration.between(publishTime, now);
+
                 var visible = post.getSpec().getVisible();
                 if (Objects.equals(newPostNotified,"false") &&
-                    Duration.between(now, publishTime).getSeconds() <= 300 &&
+                    duration.getSeconds()  <= 300 &&
                     visible.equals(Post.VisibleEnum.PUBLIC)) {
 
                     String owner = post.getSpec().getOwner();

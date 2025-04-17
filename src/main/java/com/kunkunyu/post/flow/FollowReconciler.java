@@ -5,16 +5,11 @@ import com.kunkunyu.post.flow.service.FollowService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import run.halo.app.core.extension.notification.Subscription;
 import run.halo.app.extension.ExtensionClient;
 import run.halo.app.extension.ExtensionUtil;
 import run.halo.app.extension.controller.Controller;
 import run.halo.app.extension.controller.ControllerBuilder;
 import run.halo.app.extension.controller.Reconciler;
-import run.halo.app.notification.NotificationCenter;
-import run.halo.app.notification.UserIdentity;
-
-import static com.kunkunyu.post.flow.NotificationReasonConst.SUBSCRIBE_TO_NEW_POST;
 
 @Slf4j
 @Component
@@ -22,8 +17,6 @@ import static com.kunkunyu.post.flow.NotificationReasonConst.SUBSCRIBE_TO_NEW_PO
 public class FollowReconciler implements Reconciler<Reconciler.Request> {
 
     private final ExtensionClient client;
-
-    private final NotificationCenter notificationCenter;
 
     private final FollowService followService;
 
