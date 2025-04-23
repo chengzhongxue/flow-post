@@ -166,7 +166,7 @@ const handleDeleteInBatch = async () => {
             class="relative flex flex-col flex-wrap items-start gap-4 sm:flex-row sm:items-center"
           >
             <div
-              v-permission="['plugin:thyuu:comment:manage']"
+              v-permission="['plugin:flow:post:follow:manage']"
               class="hidden items-center sm:flex"
             >
               <input

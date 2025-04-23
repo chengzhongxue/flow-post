@@ -107,7 +107,7 @@ public class NotificationReasonPublisher {
             String url = externalLinkProcessor.processLink(post.getStatus().getPermalink());
             String cancelUrl = getUnsubscribeUrl(follow);
             String title = post.getSpec().getTitle();
-            Post.Excerpt excerpt = post.getSpec().getExcerpt();
+            String excerpt = post.getStatus().getExcerpt();
             var reasonSubject = Reason.Subject.builder()
                 .apiVersion(post.getApiVersion())
                 .kind(post.getKind())
@@ -124,7 +124,7 @@ public class NotificationReasonPublisher {
                         .postPublishTime(DATE_TIME_FORMATTER.format(post.getSpec().getPublishTime()))
                         .postOwner(postOwner)
                         .postUrl(url)
-                        .postExcerpt(excerpt.getRaw())
+                        .postExcerpt(excerpt)
                         .build();
                     builder.attributes(ReasonDataConverter.toAttributeMap(attributes))
                         .author(UserIdentity.anonymousWithEmail(follow.getEmail()))
