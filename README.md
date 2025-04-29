@@ -21,6 +21,9 @@
 
 <!-- 同时设置对齐方式和标题 -->
 <follow-card text-align="left" title-text="加入我的订阅列表"></follow-card>
+
+<!-- 输入框与订阅按键强制多行显示 -->
+<follow-card show-multiline="true"></follow-card>
 ```
 
 ## 预览
