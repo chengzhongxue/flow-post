@@ -22,6 +22,8 @@ import BubbleItemICardTitle from "@/editor/BubbleItemICardTitle.vue";
 import FluentAppTitle20Regular from '~icons/fluent/app-title-20-regular?width=1.2em&height=1.2em';
 import FluentAppTitle20Filled from '~icons/fluent/app-title-20-filled?width=1.2em&height=1.2em';
 import MdiFormatTitle from '~icons/mdi/format-title?width=1.2em&height=1.2em';
+import LsiconDensityLFilled from '~icons/lsicon/density-l-filled';
+import LsiconDensityLOutline from '~icons/lsicon/density-l-outline';
 
 declare module "@halo-dev/richtext-editor" {
   interface Commands<ReturnType> {
@@ -72,6 +74,17 @@ const FollowCardExtension = Node.create({
         renderHTML: (attributes) => {
           return {
             "title-text": attributes.titleText,
+          };
+        },
+      },
+      showMultiline: {
+        default: "false",
+        parseHTML: (element) => {
+          return element.getAttribute("show-multiline");
+        },
+        renderHTML: (attributes) => {
+          return {
+            "show-multiline": attributes.showMultiline,
           };
         },
       },
@@ -220,6 +233,29 @@ const FollowCardExtension = Node.create({
                 title: "修改标题",
                 action: () => {
                   return markRaw(BubbleItemICardTitle);
+                },
+              },
+            },
+            {
+              priority: 47,
+              props: {
+                title:
+                  editor.getAttributes(FollowCardExtension.name).showMultiline === "true"
+                    ? "多行显示"
+                    : "默认显示",
+                isActive: () => {
+                  return editor.getAttributes(FollowCardExtension.name).showMultiline  === "true";
+                },
+                icon: markRaw(
+                  editor.getAttributes(FollowCardExtension.name).showMultiline === "true"
+                    ? LsiconDensityLFilled
+                    : LsiconDensityLOutline
+                ),
+                action: () => {
+                  const showMultiline = editor.getAttributes(FollowCardExtension.name).showMultiline;
+                  editor.commands.updateAttributes(FollowCardExtension.name, {
+                    showMultiline: showMultiline === "false" ? "true" : "false"
+                  });
                 },
               },
             },

@@ -26,6 +26,9 @@ const titleText = computed({
     props.updateAttributes({ titleText: titleText });
   },
 });
+const showMultiline = computed(() => {
+  return props.node.attrs.showMultiline;
+});
 </script>
 
 <template>
@@ -39,6 +42,7 @@ const titleText = computed({
         :text-align="textAlign"
         :show-title="showTitle"
         :title-text="titleText" 
+        :show-multiline="showMultiline"
       />
     </div>
     

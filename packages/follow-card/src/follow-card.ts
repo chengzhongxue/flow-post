@@ -11,6 +11,9 @@ export class FollowCard extends LitElement {
   @property({ type: String, attribute: 'show-title' })
   showTitle = 'true';
 
+  @property({ type: String, attribute: 'show-multiline' })
+  showMultiLine = "false";
+
   @property({ type: String, attribute: 'title-text' })
   titleText = '订阅最新内容推送';
 
@@ -74,7 +77,7 @@ export class FollowCard extends LitElement {
                           <h1 class="text-xl sm:text-2xl font-semibold text-title mb-2">${this.titleText}</h1>
                       </div>
                       ` : ''}
-                      <div class="flex flex-col sm:flex-row gap-4">
+                      <div class="flex flex-col gap-4 ${this.showMultiLine !== 'true' && 'sm:flex-row'}">
                           <div class="input-wrapper flex-1">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-description">
                                   <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
