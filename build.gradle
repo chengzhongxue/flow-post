@@ -5,7 +5,7 @@ plugins {
     id "run.halo.plugin.devtools" version "0.2.0"
 }
 
-group 'run.halo.starter'
+group 'com.kunkunyu.post.flow'
 sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -53,7 +53,7 @@ build {
 
 
 halo {
-    version = '2.20'
+    version = '2.21.0-alpha.1'
     superAdminUsername = 'admin'
     superAdminPassword = 'admin'
     externalUrl = 'http://localhost:8094'

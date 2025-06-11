@@ -2,6 +2,7 @@ package com.kunkunyu.post.flow;
 
 import com.kunkunyu.post.flow.extension.Follow;
 import org.springframework.stereotype.Component;
+import run.halo.app.extension.Scheme;
 import run.halo.app.extension.SchemeManager;
 import run.halo.app.extension.index.IndexSpec;
 import run.halo.app.plugin.BasePlugin;
@@ -40,6 +41,6 @@ public class FlowPostPlugin extends BasePlugin {
 
     @Override
     public void stop() {
-        schemeManager.unregister(schemeManager.get(Follow.class));
+        schemeManager.unregister(Scheme.buildFromType(Follow.class));
     }
 }

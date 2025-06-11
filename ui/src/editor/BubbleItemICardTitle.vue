@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type {Editor} from "@halo-dev/richtext-editor";
 import { computed, type Component } from "vue";
-import BubbleItemICardTitle from "@/editor/BubbleItemICardTitle.vue";
 import FollowCardExtension from "@/editor/follow-card-edited";
 
 const props = defineProps<{

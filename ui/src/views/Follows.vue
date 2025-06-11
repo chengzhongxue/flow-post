@@ -10,7 +10,10 @@ import {
   VSpace,
   VButton,
   VPagination,
-  IconRefreshLine, Dialog, Toast
+  IconRefreshLine, 
+  Dialog, 
+  Toast,
+  VEntityContainer
 } from "@halo-dev/components";
 import {flowPostApiClient, flowPostCoreApiClient} from "@/api";
 import FollowListItem from "@/components/FollowListItem.vue";
@@ -259,26 +262,23 @@ const handleDeleteInBatch = async () => {
         </VEmpty>
       </Transition>
       <Transition v-else appear name="fade">
-        <ul
-          class="box-border size-full divide-y divide-gray-100"
-          role="list"
-        >
-          <li v-for="follow in follows?.items" :key="follow.metadata.name">
-            <FollowListItem
-              :follow="follow"
-              :is-selected="checkSelection(follow)"
-            >
-              <template #checkbox>
-                <input
-                  v-model="selectedFollowNames"
-                  :value="follow.metadata.name"
-                  name="comment-checkbox"
-                  type="checkbox"
-                />
-              </template>
-            </FollowListItem>
-          </li>
-        </ul>
+        <VEntityContainer>
+          <FollowListItem
+            v-for="follow in follows?.items" 
+            :key="follow.metadata.name"
+            :follow="follow"
+            :is-selected="checkSelection(follow)"
+          >
+            <template #checkbox>
+              <input
+                v-model="selectedFollowNames"
+                :value="follow.metadata.name"
+                name="comment-checkbox"
+                type="checkbox"
+              />
+            </template>
+          </FollowListItem>
+        </VEntityContainer>
       </Transition>
       <template #footer>
         <VPagination
